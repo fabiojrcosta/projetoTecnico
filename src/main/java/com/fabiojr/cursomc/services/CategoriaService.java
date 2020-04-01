@@ -10,13 +10,13 @@ import com.fabiojr.cursomc.repositories.CategoriaRepository;
 
 @Service
 public class CategoriaService {
-	
+
 	@Autowired
 	private CategoriaRepository repo;
-		
-		public Categoria find(Integer id) {
-			Optional<Categoria> obj = repo.findById(id);
-			return obj.orElse(null);
+
+	public Categoria find(Integer id) {
+		Optional<Categoria> obj = repo.findById(id);
+		return obj.orElse(null);
 	}
 
 }

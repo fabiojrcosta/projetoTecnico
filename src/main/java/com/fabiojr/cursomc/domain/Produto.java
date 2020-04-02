@@ -15,7 +15,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -28,13 +27,10 @@ public class Produto implements Serializable {
 	private String nome;
 	private String fornecedor;
 	private Double preco;
-	
 
-
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany
-	@JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"),
-	inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+	@JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 
 	private List<Categoria> categorias = new ArrayList<>();
 
@@ -42,10 +38,9 @@ public class Produto implements Serializable {
 	@OneToMany(mappedBy = "id.produto")
 	private Set<ItemPedido> itens = new HashSet<>();
 
-	
-	public Produto() {		
+	public Produto() {
 	}
-	
+
 	public Produto(Integer id, String nome, String fornecedor, Double preco) {
 		super();
 		this.id = id;
@@ -53,24 +48,24 @@ public class Produto implements Serializable {
 		this.fornecedor = fornecedor;
 		this.preco = preco;
 	}
-	
+
 	@JsonIgnore
-	public List<Pedido> getPedidos(){
+	public List<Pedido> getPedidos() {
 		List<Pedido> lista = new ArrayList<>();
-		for(ItemPedido x : itens) {
+		for (ItemPedido x : itens) {
 			lista.add(x.getPedido());
 		}
 		return lista;
-}
+	}
+
 	public List<Categoria> getCategorias() {
 		return categorias;
 	}
+
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
 	}
 
-	
-	
 	public Integer getId() {
 		return id;
 	}
@@ -135,6 +130,5 @@ public class Produto implements Serializable {
 			return false;
 		return true;
 	}
-
 
 }

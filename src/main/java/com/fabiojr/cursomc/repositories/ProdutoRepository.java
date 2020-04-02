@@ -7,6 +7,5 @@ import com.fabiojr.cursomc.domain.Produto;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
-	
 
 }

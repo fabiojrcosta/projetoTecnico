@@ -7,6 +7,5 @@ import com.fabiojr.cursomc.domain.Cidade;
 
 @Repository
 public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
-	
 
 }

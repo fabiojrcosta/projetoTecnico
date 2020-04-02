@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Produto implements Serializable {
@@ -28,8 +29,7 @@ public class Produto implements Serializable {
 	private String fornecedor;
 	private Double preco;
 	
-	@OneToMany(mappedBy = "id.produto")
-	private Set<ItemPedido> itens = new HashSet<>();
+
 
 	@JsonBackReference
 	@ManyToMany
@@ -38,14 +38,14 @@ public class Produto implements Serializable {
 
 	private List<Categoria> categorias = new ArrayList<>();
 
-	public List<Pedido> getPedidos(){
-		List<Pedido> lista = new ArrayList<>();
-		for(ItemPedido x : itens) {
-			lista.add(x.getPedido());
-		}
-		return lista;
-	}
+	@JsonIgnore
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemPedido> itens = new HashSet<>();
 
+	
+	public Produto() {		
+	}
+	
 	public Produto(Integer id, String nome, String fornecedor, Double preco) {
 		super();
 		this.id = id;
@@ -53,15 +53,22 @@ public class Produto implements Serializable {
 		this.fornecedor = fornecedor;
 		this.preco = preco;
 	}
-
+	
+	@JsonIgnore
+	public List<Pedido> getPedidos(){
+		List<Pedido> lista = new ArrayList<>();
+		for(ItemPedido x : itens) {
+			lista.add(x.getPedido());
+		}
+		return lista;
+}
 	public List<Categoria> getCategorias() {
 		return categorias;
 	}
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
 	}
-	public Produto() {		
-	}
+
 	
 	
 	public Integer getId() {

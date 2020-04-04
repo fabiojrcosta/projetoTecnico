@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.fabiojr.projetoTecnico.domain.Categoria;
+import com.fabiojr.projetoTecnico.domain.Cliente;
 import com.fabiojr.projetoTecnico.dto.CategoriaDTO;
 import com.fabiojr.projetoTecnico.repositories.CategoriaRepository;
 import com.fabiojr.projetoTecnico.services.exceptions.DataIntegrityException;
@@ -31,6 +32,12 @@ public class CategoriaService {
 	public Categoria insert(Categoria obj) {
 		obj.setId(null);
 		return repo.save(obj);
+	}
+	
+	public Categoria update(Cliente obj) {
+		Categoria newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 
 	public Categoria update(Categoria obj) {
@@ -60,6 +67,12 @@ public class CategoriaService {
 	public Categoria fromDTO(CategoriaDTO objtDto) {
 		return new Categoria(objtDto.getId(), objtDto.getNome());
 	}
+	
+	private void updateData(Categoria newObj, Cliente obj) {
+		newObj.setNome(obj.getNome());
+		
+	}
+
 	
 		
 }

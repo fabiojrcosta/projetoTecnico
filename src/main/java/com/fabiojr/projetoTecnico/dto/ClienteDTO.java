@@ -2,11 +2,10 @@ package com.fabiojr.projetoTecnico.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.Email;
 
 import com.fabiojr.projetoTecnico.domain.Cliente;
 
@@ -28,8 +27,8 @@ public class ClienteDTO implements Serializable {
 
 	public ClienteDTO(Cliente obj) {
 		id = obj.getId();
-		setNome(obj.getNome());
-		setEmail(obj.getEmail());
+		nome = (obj.getNome());
+		email = (obj.getEmail());
 
 	}
 

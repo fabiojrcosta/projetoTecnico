@@ -70,20 +70,42 @@ public class ProjetoTecnicocApplication implements CommandLineRunner {
 
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Escritorio");
+		Categoria cat3 = new Categoria(null, "Top Geek");
 
-		Produto p1 = new Produto(null, "Computador", "OnLine Imports", 2000.00);
+		Produto p1 = new Produto(null, "Computador completo I5", "OnLine Imports", 2000.00);
 		Produto p2 = new Produto(null, "Impressora HP 1100wp", "OnLine Imports", 600.00);
-		Produto p3 = new Produto(null, "Mouse", "OnLine Imports", 80.00);
+		Produto p3 = new Produto(null, "Mouse Simples", "OnLine Imports", 80.00);
+		Produto p4 = new Produto(null, "Mouse Razer", "OnLine Imports", 120.00);
+		Produto p5 = new Produto(null, "Mouse optmus", "OnLine Imports", 100.00);
+		Produto p6 = new Produto(null, "Caneta Azul", "Bic Imports LTDA", 4.00);
+		Produto p7 = new Produto(null, "Caneta preta", "Bic Imports", 4.00);
+		Produto p8 = new Produto(null, " Grampeador", "OnLine Imports", 12.00);
+		Produto p9 = new Produto(null, "Monitor 14pol Samsung", "Imports Samsung do Brasil", 450.00);
+		Produto p10 = new Produto(null,  "Cadeira Gamer ssw5", "Moveis Coelho", 600.00);
+		Produto p11 = new Produto(null, "Adesivos Geek", "Grafica topico", 50.00);
+		Produto p12 = new Produto(null, "Miniatura Hommer Simpson", "Geeks miniaturas LTDA", 60.00);
+		Produto p13 = new Produto(null, "Caneca Goku", "Geeks miniaturas LTDA", 60.00);
 
-		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
-		cat1.getProdutos().addAll(Arrays.asList(p2));
+		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3, p4, p5, p9));
+		cat2.getProdutos().addAll(Arrays.asList(p6, p7, p8, p10));
+		cat2.getProdutos().addAll(Arrays.asList(p11, p12, p13));
 
 		p1.getCategorias().addAll(Arrays.asList(cat1));
 		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
 		p3.getCategorias().addAll(Arrays.asList(cat1));
+		p4.getCategorias().addAll(Arrays.asList(cat1));
+		p5.getCategorias().addAll(Arrays.asList(cat1));
+		p6.getCategorias().addAll(Arrays.asList(cat2));
+		p7.getCategorias().addAll(Arrays.asList(cat2));
+		p8.getCategorias().addAll(Arrays.asList(cat2));
+		p9.getCategorias().addAll(Arrays.asList(cat1));
+		p10.getCategorias().addAll(Arrays.asList(cat1, cat2));
+		p11.getCategorias().addAll(Arrays.asList(cat1, cat3));
+		p12.getCategorias().addAll(Arrays.asList(cat1, cat3));
+		p13.getCategorias().addAll(Arrays.asList(cat1, cat3));
 
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
-		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13));
 
 		Estado est1 = new Estado(null, "Santa Catarina");
 		Estado est2 = new Estado(null, "Paraná");

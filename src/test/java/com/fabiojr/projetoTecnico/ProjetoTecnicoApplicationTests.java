@@ -1,4 +1,4 @@
-package com.fabiojr.cursomc;
+package com.fabiojr.projetoTecnico;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

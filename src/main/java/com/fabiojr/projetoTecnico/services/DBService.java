@@ -157,12 +157,12 @@ public class DBService {
 
 	}
 
-	public ItemPedidoRepository getItemPedidoRepository() {
-		return itemPedidoRepository;
-	}
-
-	public void setItemPedidoRepository(ItemPedidoRepository itemPedidoRepository) {
-		this.itemPedidoRepository = itemPedidoRepository;
-	}
+//	public ItemPedidoRepository getItemPedidoRepository() {
+//		return itemPedidoRepository;
+//	}
+//
+//	public void setItemPedidoRepository(ItemPedidoRepository itemPedidoRepository) {
+//		this.itemPedidoRepository = itemPedidoRepository;
+//	}
 
 }

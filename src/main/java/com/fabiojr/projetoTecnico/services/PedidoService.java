@@ -35,6 +35,9 @@ public class PedidoService {
 	
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private EmailService emailService;
 
 
 
@@ -72,6 +75,14 @@ public class PedidoService {
 
 	public void setClienteService(ClienteService clienteService) {
 		this.clienteService = clienteService;
+	}
+
+	public EmailService getEmailService() {
+		return emailService;
+	}
+
+	public void setEmailService(EmailService emailService) {
+		this.emailService = emailService;
 	}
 
 }

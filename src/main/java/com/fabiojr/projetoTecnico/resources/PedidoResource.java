@@ -21,17 +21,17 @@ import com.fabiojr.projetoTecnico.services.PedidoService;
 public class PedidoResource {
 
 	@Autowired
-	private PedidoService service;
+	private PedidoService services;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Pedido> find(@PathVariable Integer id) {
-		Pedido obj = service.find(id);
+		Pedido obj = services.find(id);
 		return ResponseEntity.ok().body(obj);
 
 	}
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Pedido obj) {
-		obj = service.insert(obj);
+		obj = services.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();

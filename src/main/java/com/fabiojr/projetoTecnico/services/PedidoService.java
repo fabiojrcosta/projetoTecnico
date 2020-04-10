@@ -14,7 +14,7 @@ import com.fabiojr.projetoTecnico.enums.EstadoPagamento;
 import com.fabiojr.projetoTecnico.repositories.ItemPedidoRepository;
 import com.fabiojr.projetoTecnico.repositories.PagamentoRepository;
 import com.fabiojr.projetoTecnico.repositories.PedidoRepository;
-import com.fabiojr.projetoTecnico.services.exceptions.ObjectNotFoundException;
+import com.sun.jdi.ObjectCollectedException;
 
 @Service
 public class PedidoService {
@@ -41,9 +41,10 @@ public class PedidoService {
 
 
 
+
 	public Pedido find(Integer id) {
 		Optional<Pedido> obj = repo.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
+		return obj.orElseThrow(() -> new ObjectCollectedException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
 	}
 	
@@ -67,6 +68,14 @@ public class PedidoService {
 		itemPedidoRepository.saveAll(obj.getItens());
 		emailService.sendOrderConfirmationHtmlEmail(obj);
 		return obj;
+	}
+
+	public ClienteService getClienteService() {
+		return clienteService;
+	}
+
+	public void setClienteService(ClienteService clienteService) {
+		this.clienteService = clienteService;
 	}
 
 }

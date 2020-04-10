@@ -20,6 +20,7 @@ import com.fabiojr.projetoTecnico.domain.PagamentoComCartao;
 import com.fabiojr.projetoTecnico.domain.Pedido;
 import com.fabiojr.projetoTecnico.domain.Produto;
 import com.fabiojr.projetoTecnico.enums.EstadoPagamento;
+import com.fabiojr.projetoTecnico.enums.Perfil;
 import com.fabiojr.projetoTecnico.enums.TipoCliente;
 import com.fabiojr.projetoTecnico.repositories.CategoriaRepository;
 import com.fabiojr.projetoTecnico.repositories.CidadeRepository;
@@ -33,8 +34,11 @@ import com.fabiojr.projetoTecnico.repositories.ProdutoRepository;
 
 @Service
 public class DBService {
-
+    
 	@Autowired
+	private BCryptPasswordEncoder pe;
+	
+    @Autowired
 	private CategoriaRepository categoriaRepository;
 
 	@Autowired
@@ -61,8 +65,7 @@ public class DBService {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 	
-	@Autowired
-	private BCryptPasswordEncoder pe;
+	
 
 	public void instantiateTestDatabase() throws ParseException {
 
@@ -118,18 +121,25 @@ public class DBService {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
-		Cliente cli1 = new Cliente(null, "Maria Silva", "nelio.cursos@gmail.com", "36378912377", TipoCliente.PESSOAFISICA, pe.encode("123"));
-
-
+		Cliente cli1 = new Cliente(null, "Maria Silva", "fabiojr.sweet1@gmail.com", "764.391.599-76", TipoCliente.PESSOAFISICA, pe.encode("123"));
 		cli1.getTelefones().addAll(Arrays.asList("995482214", "9987845666"));
+		cli1.addPerfil(Perfil.CLIENTE);
+		
+		Cliente cli2 = new Cliente(null, "Ana Costa", "fabiojr.sweet@gmail.com", "246.412.169-08", TipoCliente.PESSOAFISICA, pe.encode("1234"));
+		cli2.getTelefones().addAll(Arrays.asList("995482224", "9987225666"));
+		cli2.addPerfil(Perfil.ADMIN);
+		
+		
 
 		Endereco e1 = new Endereco(null, "Rua Tamoio", "casa de esquina", "20", "Girassol", "88805500", cli1, c1);
 		Endereco e2 = new Endereco(null, "Rua Taim", "casa azul", "50", "Girassol", "88809500", cli1, c2);
-
+		Endereco e3 = new Endereco(null, "Avenida Floriano", "2106", null, "Centro", "281777012", cli2, c2);
+		
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
-
-		clienteRepository.saveAll(Arrays.asList(cli1));
-		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1, cli2));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Pedido ped1 = new Pedido(null, sdf.parse("30/01/2020 1:35"), cli1, e1);

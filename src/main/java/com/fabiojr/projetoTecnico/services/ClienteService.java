@@ -25,16 +25,15 @@ import com.fabiojr.projetoTecnico.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ClienteService {
-
+    
 	@Autowired
-	private ClienteRepository repo;
-
-	@Autowired
-	private EnderecoRepository enderecoRepository;
-
+	private BCryptPasswordEncoder pe;	
 	
 	@Autowired
-	private BCryptPasswordEncoder pe;
+		private ClienteRepository repo;
+
+	@Autowired
+	private EnderecoRepository enderecoRepository;	
 	
 	public Cliente find(Integer id) {
 		Optional<Cliente> obj = repo.findById(id);
